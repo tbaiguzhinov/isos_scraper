@@ -1,0 +1,4 @@
+import
+*.sqlite3
+legacy_code
+__pycache__
