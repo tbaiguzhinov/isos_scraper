@@ -96,13 +96,13 @@ def gather_info():
                 geography_and_weather, 'Climate')
 
         if cultural_tips and calendar:
-            if country_code != '15':
+            try:
                 calendar = get_content(calendar, '2023')
-                cultural_tips = get_cultural_tips(cultural_tips)
-                country.cultural_tips = cultural_tips + calendar
-            else:
-                country.cultural_tips = get_cultural_tips(
-                    country.cultural_tips)
+            except AttributeError:
+                calendar = ''
+                print(f'Unable to load calendar for {country}')
+            cultural_tips = get_cultural_tips(cultural_tips)
+            country.cultural_tips = cultural_tips + calendar
 
         if medical:
             advice, vaccinations, diseases = get_medical(medical)
