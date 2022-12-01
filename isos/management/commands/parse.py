@@ -4,6 +4,7 @@ import os
 
 from html2text import HTML2Text
 from xlsxwriter import Workbook
+from isos_parser import settings
 
 from django.core.management import BaseCommand
 
@@ -48,6 +49,9 @@ def get_page(content_tag, country_code):
 def gather_info():
     countries = Country.objects.all()
     for country in countries:
+        if settings.DEBUG:
+            print(country)
+        
         country_code = country.isos_code
 
         landing_page = get_page('landing', country_code)

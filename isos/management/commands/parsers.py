@@ -23,6 +23,9 @@ def get_summary_and_advice(summary):
 def get_content(contents, text):
     soup = BeautifulSoup(contents, 'lxml')
     search_tag = soup.find('b', text=text)
+    if not search_tag:
+        print(text)
+        print(contents)
     info = [str(search_tag)]
     for elem in search_tag.next_siblings:
         info.append(str(elem))

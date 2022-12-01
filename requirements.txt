@@ -6,3 +6,4 @@ autopep8
 XlsxWriter==3.0.3
 html2text==2020.1.16
 requests-toolbelt==0.10.1
+django-environ==0.9.0

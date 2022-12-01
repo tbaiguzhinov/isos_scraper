@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import environ
 
 from pathlib import Path
 
@@ -23,8 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-t+!$=(z651-@vudg^v_-e-xcbd^11jv7x=xg)#1v(6q#onfc2o'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 

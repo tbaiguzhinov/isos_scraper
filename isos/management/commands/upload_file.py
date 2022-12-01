@@ -7,8 +7,13 @@ import string
 from time import sleep
 from requests_toolbelt import MultipartEncoder
 
-sys.path.append('/home/tim_baiguzhinov/')
-from authenticate import authentication
+from isos_parser import settings
+
+if not settings.DEBUG:
+    sys.path.append('/home/tim_baiguzhinov/')
+    from authenticate import authentication
+else:
+    pass
 
 
 def upload_file(file_dir, file_name):
