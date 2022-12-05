@@ -23,11 +23,19 @@ def get_summary_and_advice(summary):
 def get_content(contents, text):
     soup = BeautifulSoup(contents, 'lxml')
     search_tag = soup.find('b', text=text)
-    if not search_tag:
-        print(text)
-        print(contents)
     info = [str(search_tag)]
     for elem in search_tag.next_siblings:
+        info.append(str(elem))
+    return '\n'.join(info)
+
+
+def get_calendar(contents):
+    soup = BeautifulSoup(contents, 'lxml')
+    search_tag = soup.find('div', class_='contentBox').find('div', class_='contentMiddle').find('span')
+    info = []
+    for e in search_tag.findAll('br'):
+        e.extract()
+    for elem in search_tag.contents:
         info.append(str(elem))
     return '\n'.join(info)
 

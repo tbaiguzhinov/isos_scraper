@@ -13,7 +13,8 @@ from isos.management.commands.parsers import (get_content, get_cultural_tips,
                                               get_getting_there, get_medical,
                                               get_phone_and_power,
                                               get_summary_and_advice,
-                                              get_risk_ratings)
+                                              get_risk_ratings,
+                                              get_calendar)
 from isos.management.commands.upload_file import upload_file
 from isos.models import Country
 
@@ -48,6 +49,7 @@ def get_page(content_tag, country_code):
 
 def gather_info():
     countries = Country.objects.all()
+    countries = Country.objects.filter(name='St Eustatius')
     for country in countries:
         if settings.DEBUG:
             print(country)
@@ -101,7 +103,7 @@ def gather_info():
 
         if cultural_tips and calendar:
             try:
-                calendar = get_content(calendar, '2023')
+                calendar = get_calendar(calendar)
             except AttributeError:
                 calendar = ''
                 print(f'Unable to load calendar for {country}')
